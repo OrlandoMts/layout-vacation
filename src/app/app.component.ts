@@ -1,16 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+} from '@angular/forms';
 import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 import { DataService } from './utils/data.service';
 import { BaseRangeDate, UserItf } from './utils/info.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+  private _userSub$!: Subscription;
   title = 'vacations';
   public frmData!: FormGroup;
   public userData!: UserItf;
@@ -23,19 +30,29 @@ export class AppComponent implements OnInit {
     calendar: NgbCalendar,
     private _dataSrv: DataService
   ) {
-    this.userData = this._dataSrv.useDummy;
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    this._userSub$ = this._dataSrv.userObs.subscribe((res: UserItf) => {
+      res && (this.userData = res);
+    });
   }
 
   ngOnInit(): void {
+    this._dataSrv.getUser(); // execute next
     this.frmData = this._fb.group({
       request: this._fb.array([]),
     });
   }
 
-  public getRange(event: BaseRangeDate) {
-    console.log(event);
+  ngOnDestroy(): void {
+    if (this._userSub$ && !this._userSub$.closed) this._userSub$.unsubscribe();
+  }
+
+  public getRange(event: BaseRangeDate, rowIndex: number) {
+    const profileArray = this.frmData.controls['request'] as FormArray;
+    const row = profileArray.at(rowIndex) as FormGroup;
+    row.get('starDay')?.setValue(event.from);
+    row.get('endDay')?.setValue(event.to);
   }
 
   // Array bidimensional
@@ -62,5 +79,9 @@ export class AppComponent implements OnInit {
   }
   // End Array bidimensional
 
-  public onSubmit() {}
+  public onSubmit() {
+    this.rowsFormArray.value.forEach((response: any) => {
+      console.log(response);
+    });
+  }
 }

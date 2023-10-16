@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { RequestItf, UserItf } from './info.interface';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
+  private _userSub$: Subject<UserItf> = new Subject();
+  public userObs = this._userSub$.asObservable();
   private _userDummy: UserItf = {
     name: 'Orlando Daniel Montes Antonio',
     numberEmployee: 70712,
@@ -15,6 +18,10 @@ export class DataService {
   private _listRequest: Array<RequestItf> = [];
 
   constructor() {}
+
+  public getUser() {
+    this._userSub$.next(this.useDummy)
+  }
 
   get useDummy(): UserItf {
     return this._userDummy;
