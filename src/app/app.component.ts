@@ -35,7 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((res: Array<RequestItf>) => {
-        console.log(res);
+        // NOTE: Servirá para realizar la tabla
       });
   }
 
@@ -65,7 +65,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public createRequest(): FormGroup {
     return this._fb.group({
+      type: [''],
       days: [''],
+      midday: [false],
       starDay: [''],
       endDay: [''],
       comment: [''],

@@ -16,4 +16,6 @@ export interface RequestItf {
   dayStart: string;
   dayEnd: string;
   comment?: string;
+  type?: string;
+  midday?: boolean;
 }

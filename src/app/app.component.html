@@ -15,10 +15,7 @@
         </ngb-alert>
       </p>
       <hr />
-      <form
-        [formGroup]="frmData"
-        enctype="multipart/form-data"
-      >
+      <form [formGroup]="frmData" enctype="multipart/form-data">
         <div
           class="form-group col-12 col-sm-12 col-md-12 col-lg-12"
           formArrayName="request"
@@ -47,6 +44,66 @@
                         <ng-template>
                           <div class="row">
                             <div
+                              class="form-group col-sm-12 col-md-12 col-lg-12 mb-3"
+                            >
+                              <div class="form-check form-check-inline">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  formControlName="type"
+                                  id="exampleRadios1"
+                                  value="idVacaciones"
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="exampleRadios1"
+                                  >Vacaciones</label
+                                >
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  formControlName="type"
+                                  id="exampleRadios2"
+                                  value="idEconomico"
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="exampleRadios2"
+                                  >Económico</label
+                                >
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  formControlName="type"
+                                  id="exampleRadios3"
+                                  value="idPermiso"
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="exampleRadios3"
+                                  >Permiso</label
+                                >
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  formControlName="type"
+                                  id="exampleRadios4"
+                                  value="idPermisoEspecial"
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="exampleRadios4"
+                                  >Permiso Especial</label
+                                >
+                              </div>
+                            </div>
+                            <div
                               class="form-group col-sm-12 col-md-12 col-lg-12"
                             >
                               <div class="form-floating mb-3">
@@ -63,6 +120,21 @@
                                 <label for="floatingInput"
                                   >Días a disfrutar</label
                                 >
+                              </div>
+
+                              <div class="form-check mb-3">
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  formControlName="midday"
+                                  id="checkMidday"
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="checkMidday"
+                                >
+                                  Medio día
+                                </label>
                               </div>
                               <div>
                                 <app-calendar
