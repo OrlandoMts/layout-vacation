@@ -7,9 +7,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { allIcons } from 'angular-feather/icons';
 import { AppComponent } from './app.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { Calendar2Component } from './components/calendar2/calendar2.component';
 
 @NgModule({
-  declarations: [AppComponent, CalendarComponent, CalendarComponent],
+  declarations: [AppComponent, CalendarComponent, CalendarComponent, Calendar2Component],
   imports: [
     BrowserModule,
     ReactiveFormsModule,

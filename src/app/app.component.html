@@ -1,4 +1,10 @@
 <div class="card container mt-4 shadow-sm">
+  <div class="row">
+    <app-calendar2 [datesSelected]="datesSelected" (datesSelectedChange)="change($event)" ></app-calendar2>
+
+    <hr>
+    <pre>DateSelected: {{ datesSelected | json }} </pre>
+  </div>
   <section class="row">
     <div class="card-body py-3">
       <section>

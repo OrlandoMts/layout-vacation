@@ -5,7 +5,7 @@ import {
   FormBuilder,
   FormGroup,
 } from '@angular/forms';
-import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 import { DataService } from './utils/data.service';
 import { BaseRangeDate, UserItf } from './utils/info.interface';
@@ -24,6 +24,8 @@ export class AppComponent implements OnInit, OnDestroy {
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate;
   toDate: NgbDate | null = null;
+
+  datesSelected:NgbDateStruct[]=[];
 
   constructor(
     private _fb: FormBuilder,
@@ -46,6 +48,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this._userSub$ && !this._userSub$.closed) this._userSub$.unsubscribe();
+  }
+
+  public change(value:NgbDateStruct[])
+  {
+    this.datesSelected=value;
   }
 
   public getRange(event: BaseRangeDate, rowIndex: number) {
